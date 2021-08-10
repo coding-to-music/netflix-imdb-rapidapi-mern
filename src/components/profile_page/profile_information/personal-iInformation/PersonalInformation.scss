@@ -1,0 +1,16 @@
+.person{
+  padding-right: 20px;
+  .avatar {
+    height: 120px;
+    width: 120px;
+    border-radius: 100%;
+    background-color: #F2A999;
+    margin: 0 auto;
+  }
+
+  .name {
+    text-align: center;
+    padding-top: 20px;
+    font-size: 28px;
+  }
+}

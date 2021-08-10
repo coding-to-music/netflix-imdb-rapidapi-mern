@@ -1,0 +1,16 @@
+.header{
+  background-color: #F2EAE4;
+  padding: 10px 100px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  .logo{
+    height: 70px;
+  }
+  .profile-icon{
+    height: 60px;
+    width: 60px;
+    border-radius: 100%;
+    background-color: #F2A999;
+  }
+}
