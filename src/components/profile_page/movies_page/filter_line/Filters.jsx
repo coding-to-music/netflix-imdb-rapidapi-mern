@@ -2,6 +2,7 @@ import React from "react";
 import './Filters.scss'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {FormControl, InputLabel, makeStyles, MenuItem, Select, TextField} from "@material-ui/core";
+import PropTypes from 'prop-types';
 
 
 const useStyles = makeStyles(() => ({
@@ -15,13 +16,12 @@ const useStyles = makeStyles(() => ({
         "& .MuiInputLabel-outlined.Mui-focused": {
             color: "dimgray"
         },
-        minWidth: 120,
     }
 }));
 
 
-const Filters = () => {
-
+const Filters = (props) => {
+    const width = props.minWidth;
     function yearsList() {
         let currentYear = new Date().getFullYear();
         let years = [];
@@ -32,7 +32,6 @@ const Filters = () => {
     }
 
     const years = yearsList();
-    console.log(years)
     const classes = useStyles();
     const genres = [
         {title: 'Action'},
@@ -61,22 +60,24 @@ const Filters = () => {
         {title: 'War'},
         {title: 'Western'}
     ];
-    console.log(genres)
+
     return (
 
         <div className={'filters'}>
             <div className={'search-filter'}>
                 <TextField className={classes.root}
-                    id="outlined-basic"
-                    label="Search"
-                    variant="outlined"/>
+                           id="outlined-basic"
+                           label="Search"
+                           variant="outlined"
+                           style={{minWidth: width}}
+                />
             </div>
             <div className={'year-filter'}>
                 <Autocomplete className={classes.root}
                               id="combo-box-demo"
                               options={years}
                               getOptionLabel={(option) => option.title}
-                              style={{width: 150}}
+                              style={{minWidth: width}}
                               renderInput={(params) => <TextField {...params} label="Year" variant="outlined"/>}
                 />
             </div>
@@ -85,7 +86,7 @@ const Filters = () => {
                               id="combo-box-demo"
                               options={genres}
                               getOptionLabel={(option) => option.title}
-                              style={{width: 200}}
+                              style={{minWidth: (width+50)}}
                               renderInput={(params) => <TextField {...params} label="Genre" variant="outlined"/>}
                 />
             </div>
@@ -96,7 +97,7 @@ const Filters = () => {
                         labelId="select-outlined-label"
                         id="select-outlined"
                         label="Sort by"
-                        style={{width: 150}}
+                        style={{minWidth: width}}
                     >
                         <MenuItem value="">
                             <em>None</em>
@@ -104,12 +105,17 @@ const Filters = () => {
                         <MenuItem value={'alphabetA'}>A-Z</MenuItem>
                         <MenuItem value={'alphabetZ'}>Z-A</MenuItem>
                         <MenuItem value={'year'}>Year</MenuItem>
+                        <MenuItem value={'rating'}>IMDb Rating</MenuItem>
                     </Select>
                 </FormControl>
             </div>
         </div>
 
     )
+}
+
+Filters.propTypes = {
+    minWidth: PropTypes.number,
 }
 
 export default Filters;

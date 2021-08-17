@@ -1,10 +1,14 @@
 .profile-information{
+  height: 600px;
   grid-area: p;
   background-color: #F2EAE4;
   border-radius: 10px;
   padding: 40px 0 40px 20px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  position: sticky;
+  top: 10px;
 }
 .log-out{
   text-align: center;

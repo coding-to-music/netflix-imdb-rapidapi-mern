@@ -1,25 +1,27 @@
-.film {
+.overlay-film {
   border-bottom:  1px solid #727373;
   padding: 20px;
   display: flex;
-  .film-cover{
-    max-width: 25%;
+  align-items: center;
+  .overlay-film-cover{
+    width: 40%;
     padding-right: 30px;
-    .cover{
+    .overlay-cover{
       width:100%;
       object-fit: cover;
       border-radius: 20px;
     }
   }
-  .film-information{
+  .overlay-film-information{
     padding: 20px;
-    .main{
+    width: 60%;
+    .overlay-main{
       display: flex;
       padding-bottom: 15px;
       justify-content: space-between;
       font-size: 24px;
       font-weight: bolder;
-      .rating{
+      .overlay-rating{
         display: flex;
         align-items: center;
         svg{
@@ -27,11 +29,11 @@
         }
       }
     }
-    .release-date,.genre{
+    .overlay-release-date,.genre{
       font-size: 18px;
       padding-bottom: 10px;
     }
-    .genre{
+    .overlay-genre{
       display: flex;
       padding-bottom: 30px;
       div{

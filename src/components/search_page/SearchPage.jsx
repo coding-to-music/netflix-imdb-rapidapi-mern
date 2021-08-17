@@ -1,12 +1,17 @@
 import React from "react";
 import './SearchPage.scss';
+import Filters from "../profile_page/movies_page/filter_line/Filters";
+import Movie from "../profile_page/movies_page/movie/Movie";
 
 
 const SearchPage = () => {
     return(
         <div className={'search-wrapper'}>
             <div className={'search-page'}>
-                Search Page
+                <Filters minWidth={200}/>
+                <div className={'search-movies'}>
+                    <Movie/>
+                </div>
             </div>
         </div>
     )
