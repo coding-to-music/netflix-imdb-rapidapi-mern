@@ -42,12 +42,12 @@ const Movie = (props) => {
 
     const body = (
         <div style={modalStyle} className={classes.paper}>
-            <OverlayMovie props={props.text} film={props.film}/>
+            <OverlayMovie text={props.text} film={props.film} changeList={props.changeList}/>
         </div>
     );
 
     let genres = props.film.genre.map(genre => (
-        <div key={genre.id}>{genre}</div>
+        <div key={genre}>{genre}</div>
     ))
 
     if (props.text === props.film.list) {
@@ -99,6 +99,7 @@ Movie.propTypes = {
     releaseDate: PropTypes.string,
     genre: PropTypes.array,
     shortDescription: PropTypes.string,
+    changeList: PropTypes.func
 }
 
 export default Movie;

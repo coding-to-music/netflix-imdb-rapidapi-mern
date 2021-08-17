@@ -6,9 +6,8 @@ import OverlayButton from "./overlay_button/OverlayButton";
 
 
 const OverlayMovie = (props) => {
-
     let genres = props.film.genre.map(genre => (
-        <div key={genre.id}>{genre}</div>
+        <div key={genre}>{genre}</div>
     ))
     return (
         <div>
@@ -29,13 +28,11 @@ const OverlayMovie = (props) => {
                         {genres}
                     </div>
                     <div className={'overlay-short-description'}>
-                        {props.text}
                         {props.film.fullDescription}
-
                     </div>
                 </div>
             </div>
-            <OverlayButton text={props.text}/>
+            <OverlayButton text={props.text} id={props.film.id} changeList={props.changeList}/>
         </div>
     )
 }
@@ -49,6 +46,7 @@ OverlayMovie.propTypes = {
     releaseDate: PropTypes.string,
     genre: PropTypes.array,
     fullDescription: PropTypes.string,
+    changeList: PropTypes.func
 }
 
 

@@ -21,52 +21,21 @@ const useStyles = makeStyles(() => ({
 
 
 const Filters = (props) => {
-    const width = props.minWidth;
-    function yearsList() {
-        let currentYear = new Date().getFullYear();
-        let years = [];
-        for (let i = currentYear; i > 1969; i--) {
-            years.push({title: i.toString()})
-        }
-        return years;
-    }
 
-    const years = yearsList();
+    const width = props.minWidth;
     const classes = useStyles();
-    const genres = [
-        {title: 'Action'},
-        {title: 'Adventure'},
-        {title: 'Animation'},
-        {title: 'Biography'},
-        {title: 'Comedy'},
-        {title: 'Crime'},
-        {title: 'Documentary'},
-        {title: 'Drama'},
-        {title: 'Family'},
-        {title: 'Fantasy'},
-        {title: 'Film'},
-        {title: 'Noir'},
-        {title: 'History'},
-        {title: 'Horror'},
-        {title: 'Music'},
-        {title: 'Musical'},
-        {title: 'Mystery'},
-        {title: 'Romance'},
-        {title: 'Sci-Fi'},
-        {title: 'Short'},
-        {title: 'Sport'},
-        {title: 'Superhero'},
-        {title: 'Thriller'},
-        {title: 'War'},
-        {title: 'Western'}
-    ];
+    const [genre,setGenre] = React.useState('')
+
+    const handleChange = (event) => {
+        setGenre(event.target.value);
+    };
 
     return (
 
         <div className={'filters'}>
             <div className={'search-filter'}>
                 <TextField className={classes.root}
-                           id="outlined-basic"
+                           id="search-filter"
                            label="Search"
                            variant="outlined"
                            style={{minWidth: width}}
@@ -74,8 +43,8 @@ const Filters = (props) => {
             </div>
             <div className={'year-filter'}>
                 <Autocomplete className={classes.root}
-                              id="combo-box-demo"
-                              options={years}
+                              id="year-filter"
+                              options={props.filters.years}
                               getOptionLabel={(option) => option.title}
                               style={{minWidth: width}}
                               renderInput={(params) => <TextField {...params} label="Year" variant="outlined"/>}
@@ -83,8 +52,8 @@ const Filters = (props) => {
             </div>
             <div className={'genre-filet'}>
                 <Autocomplete className={classes.root}
-                              id="combo-box-demo"
-                              options={genres}
+                              id="genre-filet"
+                              options={props.filters.genres}
                               getOptionLabel={(option) => option.title}
                               style={{minWidth: (width+50)}}
                               renderInput={(params) => <TextField {...params} label="Genre" variant="outlined"/>}
@@ -95,8 +64,10 @@ const Filters = (props) => {
                     <InputLabel id="select-outlined-label">Sort by</InputLabel>
                     <Select
                         labelId="select-outlined-label"
-                        id="select-outlined"
+                        id="sort-by"
                         label="Sort by"
+                        value={genre}
+                        onChange={handleChange}
                         style={{minWidth: width}}
                     >
                         <MenuItem value="">
@@ -116,6 +87,7 @@ const Filters = (props) => {
 
 Filters.propTypes = {
     minWidth: PropTypes.number,
+    filters:PropTypes.object
 }
 
 export default Filters;

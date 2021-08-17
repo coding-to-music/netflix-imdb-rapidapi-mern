@@ -5,6 +5,7 @@ import MoviesPage from "./movies_page/MoviesPage";
 import {Route} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
+import {changeListAC} from "../../redux/listsReducer";
 
 
 
@@ -17,15 +18,15 @@ class ProfilePageContainer extends React.Component {
                 <ProfileInformation profile={this.props.profile}/>
                 <div>
                     <Route path={'/profilePage/current'}
-                           render={() => <MoviesPage text={'Current'} film={this.props.film}/>}/>
+                           render={() => <MoviesPage text={'Current'} films={this.props.films} changeList={this.props.changeList} filters={this.props.filters}/>} />
                     <Route path={'/profilePage/planning'}
-                           render={() => <MoviesPage text={'Planning'} film={this.props.film}/>}/>
+                           render={() => <MoviesPage text={'Planning'} films={this.props.films} changeList={this.props.changeList} filters={this.props.filters}/>}/>
                     <Route path={'/profilePage/completed'}
-                           render={() => <MoviesPage text={'Completed'} film={this.props.film}/>}/>
+                           render={() => <MoviesPage text={'Completed'} films={this.props.films} changeList={this.props.changeList} filters={this.props.filters}/>}/>
                     <Route path={'/profilePage/paused'}
-                           render={() => <MoviesPage text={'Paused'} film={this.props.film}/>}/>
+                           render={() => <MoviesPage text={'Paused'} films={this.props.films} changeList={this.props.changeList} filters={this.props.filters}/>}/>
                     <Route path={'/profilePage/dropped'}
-                           render={() => <MoviesPage text={'Dropped'} film={this.props.film}/>}/>
+                           render={() => <MoviesPage text={'Dropped'} films={this.props.films} changeList={this.props.changeList} filters={this.props.filters}/>}/>
                 </div>
             </div>
         )
@@ -34,13 +35,25 @@ class ProfilePageContainer extends React.Component {
 
 let mapStateToProps = (state) => ({
     profile: state.profileInfo.profile,
-    film: state.filmLists.films
+    films: state.filmLists.films,
+    filters: state.filters,
 });
+
+let mapDispatchToProps = (dispatch) => {
+    return {
+        changeList : (button,id) => {
+            dispatch(changeListAC(button,id));
+        }
+
+    }
+}
 
 ProfilePageContainer.propTypes = {
     profile: PropTypes.object,
-    film: PropTypes.object,
+    films: PropTypes.array,
+    changeList: PropTypes.func,
+    filters: PropTypes.object,
 }
 
 
-export default connect(mapStateToProps)(ProfilePageContainer);
+export default connect(mapStateToProps,mapDispatchToProps)(ProfilePageContainer);
