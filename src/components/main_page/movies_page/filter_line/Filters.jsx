@@ -24,7 +24,7 @@ const Filters = (props) => {
 
     const width = props.minWidth;
     const classes = useStyles();
-    const [genre,setGenre] = React.useState('')
+    const [genre, setGenre] = React.useState('')
 
     const handleChange = (event) => {
         setGenre(event.target.value);
@@ -50,12 +50,12 @@ const Filters = (props) => {
                               renderInput={(params) => <TextField {...params} label="Year" variant="outlined"/>}
                 />
             </div>
-            <div className={'genre-filet'}>
+            <div className={'genre-filter'}>
                 <Autocomplete className={classes.root}
-                              id="genre-filet"
+                              id="genre-filter"
                               options={props.filters.genres}
                               getOptionLabel={(option) => option.title}
-                              style={{minWidth: (width+50)}}
+                              style={{minWidth: (width + 50)}}
                               renderInput={(params) => <TextField {...params} label="Genre" variant="outlined"/>}
                 />
             </div>
@@ -64,7 +64,7 @@ const Filters = (props) => {
                     <InputLabel id="select-outlined-label">Sort by</InputLabel>
                     <Select
                         labelId="select-outlined-label"
-                        id="sort-by"
+                        id="sort-by-filter"
                         label="Sort by"
                         value={genre}
                         onChange={handleChange}
@@ -87,7 +87,7 @@ const Filters = (props) => {
 
 Filters.propTypes = {
     minWidth: PropTypes.number,
-    filters:PropTypes.object
+    filters: PropTypes.object
 }
 
 export default Filters;

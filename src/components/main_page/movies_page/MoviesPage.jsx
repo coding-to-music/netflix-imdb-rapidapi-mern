@@ -6,9 +6,8 @@ import PropTypes from 'prop-types';
 
 
 const MoviesPage = (props) => {
-
-    let movieElement = props.films.map(film =>(
-        <Movie key={film.id} text={props.text} film={film} changeList={props.changeList}/>));
+    let movieElement = props.movies.map(movie => (
+        <Movie key={movie.id} text={props.text} movie={movie} changeList={props.changeList}/>));
 
     return (
         <div className={'movies'}>
@@ -20,9 +19,9 @@ const MoviesPage = (props) => {
 
 MoviesPage.propTypes = {
     text: PropTypes.string,
-    films: PropTypes.array,
-    changeList:PropTypes.func,
-    filters:PropTypes.object
+    movies: PropTypes.array,
+    changeList: PropTypes.func,
+    filters: PropTypes.object
 }
 
 

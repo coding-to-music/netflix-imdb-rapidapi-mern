@@ -42,35 +42,35 @@ const Movie = (props) => {
 
     const body = (
         <div style={modalStyle} className={classes.paper}>
-            <OverlayMovie text={props.text} film={props.film} changeList={props.changeList}/>
+            <OverlayMovie text={props.text} movie={props.movie} changeList={props.changeList}/>
         </div>
     );
 
-    let genres = props.film.genre.map(genre => (
+    let genres = props.movie.genre.map(genre => (
         <div key={genre}>{genre}</div>
     ))
 
-    if (props.text === props.film.list) {
+    if (props.text === props.movie.list) {
         return (
             <div>
                 <div className={'film'} onClick={handleOpen}>
                     <div className={'film-cover'}>
                         <img className={'cover'} alt={'Film Cover'}
-                             src={props.film.cover}/>
+                             src={props.movie.cover}/>
                     </div>
                     <div className={'film-information'}>
                         <div className={'main'}>
-                            <div className={'title'}>{props.film.title}</div>
+                            <div className={'title'}>{props.movie.title}</div>
                             <div className={'rating'}>
-                                <FaRegStar/>{props.film.rating}
+                                <FaRegStar/>{props.movie.rating}
                             </div>
                         </div>
-                        <div className={'release-date'}>{props.film.releaseDate}</div>
+                        <div className={'release-date'}>{props.movie.releaseDate}</div>
                         <div className={'genre'}>
                             {genres}
                         </div>
                         <div className={'short-description'}>
-                            {props.film.shortDescription}
+                            {props.movie.shortDescription}
                         </div>
                     </div>
                 </div>
@@ -91,7 +91,7 @@ const Movie = (props) => {
 }
 
 Movie.propTypes = {
-    film: PropTypes.object,
+    movie: PropTypes.object,
     text: PropTypes.string,
     cover: PropTypes.string,
     title: PropTypes.string,

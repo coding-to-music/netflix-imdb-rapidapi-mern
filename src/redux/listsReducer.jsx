@@ -1,7 +1,10 @@
+import {moviesAPI} from "../api/moviesAPI";
+
 const CHANGE_LIST = 'CHANGE_LIST';
+const SET_FILMS_STATE = 'SET_FILMS_STATE';
 
 let initialState = {
-    films: [
+    movies: [
         {
             id: 1,
             list: 'Current',
@@ -37,19 +40,9 @@ let initialState = {
                 '\n' +
                 '48 years earlier, unknown beings positioned a wormhole near Saturn, opening a path to a distant galaxy with 12 potentially habitable worlds located near a black hole named Gargantua. Twelve volunteers traveled through the wormhole to individually survey the planets and three — Dr. Mann, Laura Miller, and Wolf Edmunds — reported positive results. Based on their data, Professor Brand conceived two plans to ensure humanity\'s survival. Plan A involves developing a gravitational propulsion theory to propel settlements into space, while Plan B involves launching the Endurance spacecraft carrying 5,000 frozen human embryos to settle a habitable planet.'
         },
-        {
-            id: 3,
-            list: 'Completed',
-            cover: 'https://i.pinimg.com/originals/3b/d6/01/3bd601e4b01ec716f7f4281bbf65d43c.jpg',
-            title: 'Forrest Gump',
-            rating: '8.8',
-            releaseDate: '23 June 1994',
-            genre: ['Drama', 'Romance'],
-            shortDescription: 'The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold from the perspective of an Alabama man with an IQ of 75, whose only desire is to be reunited with his childhood sweetheart.',
-            fullDescription: 'Forrest Gump is a simple man with a low I.Q. but good intentions. He is running through childhood with his best and only friend Jenny. His \'mama\' teaches him the ways of life and leaves him to choose his destiny. Forrest joins the army for service in Vietnam, finding new friends called Dan and Bubba, he wins medals, creates a famous shrimp fishing fleet, inspires people to jog, starts a ping-pong craze, creates the smiley, writes bumper stickers and songs, donates to people and meets the president several times. However, this is all irrelevant to Forrest who can only think of his childhood sweetheart Jenny Curran, who has messed up her life. Although in the end all he wants to prove is that anyone can love anyone.'
-        }
     ]
 }
+
 
 const listsReducer = (state = initialState, action) => {
 
@@ -57,15 +50,20 @@ const listsReducer = (state = initialState, action) => {
         case CHANGE_LIST: {
             let stateCopy = {
                 ...state,
-                films: [...state.films]
+                movies: [...state.movies]
             }
-            for (let i = 0; i < state.films.length; i++) {
-                let stateId = state.films[i].id;
+            for (let i = 0; i < state.movies.length; i++) {
+                let stateId = state.movies[i].id;
                 if (action.id === stateId) {
-                    stateCopy.films[i].list = action.button
+                    stateCopy.movies[i].list = action.button
                 }
             }
             return stateCopy;
+        }
+        case SET_FILMS_STATE: {
+            return {
+                ...state, movies: action.movies
+            }
         }
         default:
             return state;
@@ -74,6 +72,25 @@ const listsReducer = (state = initialState, action) => {
 
 
 export const changeListAC = (button, id) => ({type: CHANGE_LIST, button: button, id: id});
+export const setMoviesStateAC = (movies) => ({type: SET_FILMS_STATE, movies: movies});
+
+
+export const changeListTC = (id, button) => {
+    return (dispatch) => {
+        moviesAPI.changeList(id, button)
+            .then(() => {
+                dispatch(changeListAC(button, id))
+            })
+    }
+}
+
+export const getMoviesTC = () => {
+    return (dispatch) => {
+        moviesAPI.getMovies().then(response => {
+            dispatch(setMoviesStateAC(response.movies))
+        })
+    }
+}
 
 
 export default listsReducer;

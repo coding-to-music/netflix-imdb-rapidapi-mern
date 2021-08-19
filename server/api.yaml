@@ -1,0 +1,97 @@
+openapi: "3.0.0"
+info:
+  title: Movies API
+  version: "1.0"
+servers:
+  - url: http://localhost:4000
+paths:
+  /user/movies:
+    get:
+      summary: "Get movies"
+      operationId: getMovies
+      responses:
+        200:
+          description: Movies lists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  movies:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/movie'
+    post:
+      operationId: addMovie
+      summary: "Add movie"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                movies:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/movie'
+      responses:
+        200:
+          description: Added
+    patch:
+      operationId: updateMovie
+      summary: "Update movie"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                movies:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/movie'
+      responses:
+        200:
+          description: Moved
+    delete:
+      operationId: deleteMovie
+      summary: "Move movie"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                movies:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      imdbId:
+                        type: string
+      responses:
+        200:
+          description: Deleted
+
+components:
+  schemas:
+    movie:
+      type: object
+      properties:
+        imdbId:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        poster:
+          type: string
+        year:
+          type: string
+        list:
+          type: string
+          enum:
+            - current
+            - planning
+            - paused
+            - dropped

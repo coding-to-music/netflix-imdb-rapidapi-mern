@@ -1,4 +1,3 @@
-
 function yearsList() {
     let currentYear = new Date().getFullYear();
     let years = [];
@@ -8,9 +7,8 @@ function yearsList() {
     return years;
 }
 
-
 let initialState = {
-    genres : [
+    genres: [
         {title: 'Action'},
         {title: 'Adventure'},
         {title: 'Animation'},
@@ -41,9 +39,7 @@ let initialState = {
 }
 
 const filtersReducer = (state = initialState) => {
-   return state;
+    return state;
 }
-
-
 
 export default filtersReducer;

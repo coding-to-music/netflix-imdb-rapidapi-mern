@@ -1,7 +1,7 @@
 import React from "react";
 import './SearchPage.scss';
-import Filters from "../profile_page/movies_page/filter_line/Filters";
-import Movie from "../profile_page/movies_page/movie/Movie";
+import Filters from "../main_page/movies_page/filter_line/Filters";
+import Movie from "../main_page/movies_page/movie/Movie";
 
 
 const SearchPage = () => {

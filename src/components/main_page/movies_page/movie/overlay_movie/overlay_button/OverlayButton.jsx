@@ -5,8 +5,8 @@ import {Button} from "@material-ui/core";
 
 
 const OverlayButton = (props) => {
-     const buttonClick = (button) => {
-         props.changeList(button,props.id)
+    const buttonClick = (button) => {
+        props.changeList(button, props.id)
     }
 
     return (
