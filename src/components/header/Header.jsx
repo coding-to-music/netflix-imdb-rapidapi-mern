@@ -15,7 +15,7 @@ const Header = (props) => {
                 </NavLink>
             </div>
             <div className={'search-input'}>
-                <SearchInput/>
+                <SearchInput searchMovies={props.searchMovies}/>
             </div>
             <div className={'profile-icon'}>
                 <NavLink to={'/profilePage/current'}>
@@ -30,6 +30,7 @@ const Header = (props) => {
 
 Header.propTypes = {
     profile:PropTypes.object,
+    searchMovies: PropTypes.func,
 }
 
 export default Header;

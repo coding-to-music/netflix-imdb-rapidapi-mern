@@ -1,0 +1,13 @@
+.buttons {
+  display: flex;
+  padding: 20px 10px 0;
+  justify-content: space-around;
+
+  .button-active {
+    background-color: #727373;
+    color: #F2EAE4;
+    &:hover{
+      color: black;
+    }
+  }
+}

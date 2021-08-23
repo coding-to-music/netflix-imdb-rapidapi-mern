@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import {changeListAC, getMoviesTC} from "../../redux/listsReducer";
+import { changeListTC, getMoviesTC} from "../../redux/listsReducer";
 import MainPage from "./MainPage";
 
 class MainPageContainer extends React.Component {
@@ -28,7 +28,7 @@ let mapStateToProps = (state) => ({
 let mapDispatchToProps = (dispatch) => {
     return {
         changeList: (button, id) => {
-            dispatch(changeListAC(button, id));
+            dispatch(changeListTC(button, id));
         },
         getMoviesTC: () => {
             dispatch(getMoviesTC());

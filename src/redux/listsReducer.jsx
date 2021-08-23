@@ -2,6 +2,8 @@ import {moviesAPI} from "../api/moviesAPI";
 
 const CHANGE_LIST = 'CHANGE_LIST';
 const SET_FILMS_STATE = 'SET_FILMS_STATE';
+const SET_SEARCH_FILMS_STATE = 'SET_SEARCH_FILMS_STATE';
+const SET_SEARCH_FILM_FULL_STATE = 'SET_SEARCH_FILM_FULL_STATE';
 
 let initialState = {
     movies: [
@@ -40,7 +42,9 @@ let initialState = {
                 '\n' +
                 '48 years earlier, unknown beings positioned a wormhole near Saturn, opening a path to a distant galaxy with 12 potentially habitable worlds located near a black hole named Gargantua. Twelve volunteers traveled through the wormhole to individually survey the planets and three — Dr. Mann, Laura Miller, and Wolf Edmunds — reported positive results. Based on their data, Professor Brand conceived two plans to ensure humanity\'s survival. Plan A involves developing a gravitational propulsion theory to propel settlements into space, while Plan B involves launching the Endurance spacecraft carrying 5,000 frozen human embryos to settle a habitable planet.'
         },
-    ]
+    ],
+    searchMovies: [],
+    searchMovie:{},
 }
 
 
@@ -65,6 +69,16 @@ const listsReducer = (state = initialState, action) => {
                 ...state, movies: action.movies
             }
         }
+        case SET_SEARCH_FILMS_STATE:{
+            return {
+                ...state, searchMovies: action.movies
+            }
+        }
+        case SET_SEARCH_FILM_FULL_STATE:{
+            return {
+                ...state, searchMovie: action.movie
+            }
+        }
         default:
             return state;
     }
@@ -73,14 +87,14 @@ const listsReducer = (state = initialState, action) => {
 
 export const changeListAC = (button, id) => ({type: CHANGE_LIST, button: button, id: id});
 export const setMoviesStateAC = (movies) => ({type: SET_FILMS_STATE, movies: movies});
+export const setSearchMoviesStateAC = (movies) => ({type: SET_SEARCH_FILMS_STATE, movies: movies});
+export const setSearchMovieFullStateAC = (movie) => ({type: SET_SEARCH_FILM_FULL_STATE, movie: movie});
 
 
 export const changeListTC = (id, button) => {
     return (dispatch) => {
-        moviesAPI.changeList(id, button)
-            .then(() => {
-                dispatch(changeListAC(button, id))
-            })
+        dispatch(changeListAC(button,id));
+        moviesAPI.changeList(id, button);
     }
 }
 
@@ -88,6 +102,22 @@ export const getMoviesTC = () => {
     return (dispatch) => {
         moviesAPI.getMovies().then(response => {
             dispatch(setMoviesStateAC(response.movies))
+        })
+    }
+}
+
+export const searchMoviesTC = (title) =>{
+    return(dispatch) =>{
+        moviesAPI.searchMovies(title).then(response => {
+            dispatch(setSearchMoviesStateAC(response))
+        })
+    }
+}
+
+export const searchMoviesByIDTC = (id) =>{
+    return(dispatch) =>{
+        moviesAPI.searchMoviesByID(id).then(response => {
+            dispatch(setSearchMovieFullStateAC(response))
         })
     }
 }

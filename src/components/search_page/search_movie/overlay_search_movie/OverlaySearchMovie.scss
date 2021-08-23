@@ -1,0 +1,43 @@
+.search-overlay-film {
+  border-bottom:  1px solid #727373;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  .search-overlay-film-cover{
+    width: 40%;
+    padding-right: 30px;
+    .search-overlay-cover{
+      width:100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+  }
+  .search-overlay-film-information{
+    padding: 20px;
+    width: 60%;
+    .search-overlay-main{
+      display: flex;
+      padding-bottom: 15px;
+      justify-content: space-between;
+      font-size: 24px;
+      font-weight: bolder;
+      .search-overlay-rating{
+        display: flex;
+        align-items: center;
+        svg{
+          padding-right: 5px;
+        }
+      }
+    }
+    .search-overlay-info{
+      padding: 10px 0 20px;
+      font-style: italic;
+      div{
+        margin: 10px 0;
+      }
+    }
+    .search-overlay-description{
+      font-size: 20px;
+    }
+  }
+}

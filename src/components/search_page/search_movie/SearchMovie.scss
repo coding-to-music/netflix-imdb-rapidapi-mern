@@ -1,0 +1,27 @@
+.search-film {
+  border-bottom:  1px solid #727373;
+  padding: 20px;
+  display: flex;
+  .search-film-cover{
+    max-width: 10%;
+    padding-right: 30px;
+    .search-cover{
+      width:100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+  }
+  .search-film-information{
+    padding: 20px;
+    .search-title{
+      padding-bottom: 10px;
+      font-size: 22px;
+      font-weight: bolder;
+    }
+    .search-release-date,.search-type{
+      font-size: 16px;
+      padding: 5px 0;
+      font-style: italic;
+    }
+  }
+}

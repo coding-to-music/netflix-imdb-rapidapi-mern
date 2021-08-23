@@ -2,12 +2,14 @@ import React from "react";
 import Header from "./Header";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
+import {searchMoviesTC} from "../../redux/listsReducer";
 
 
 class HeaderContainer extends React.Component {
+
     render() {
         return (
-            <Header profile={this.props.profile}/>
+            <Header profile={this.props.profile} searchMovies={this.props.searchMoviesTC}/>
         )
     }
 }
@@ -18,8 +20,17 @@ let mapStateToProps = (state) => ({
 
 })
 
-HeaderContainer.propTypes = {
-   profile:PropTypes.object,
+let mapDispatchToProps = (dispatch) => {
+    return {
+        searchMoviesTC: (title) => {
+            dispatch(searchMoviesTC(title));
+        },
+    }
 }
 
-export default connect(mapStateToProps)(HeaderContainer)
+HeaderContainer.propTypes = {
+    profile: PropTypes.object,
+    searchMoviesTC: PropTypes.func,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer)

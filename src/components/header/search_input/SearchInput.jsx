@@ -1,31 +1,57 @@
 import React from "react";
-import './SearchInput.scss'
-import {FiSearch} from 'react-icons/fi'
-import {NavLink, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
+import PropTypes from "prop-types";
+import {makeStyles, TextField} from "@material-ui/core";
 
 
-const SearchInput = () => {
+const SearchInput = (props) => {
 
+    const useStyles = makeStyles(() => ({
+        root: {
+            "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                borderColor: "#f2a999"
+            },
+            "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input": {
+                color: "dimgray"
+            },
+            "& .MuiInputLabel-outlined.Mui-focused": {
+                color: "dimgray"
+            },
+        }
+    }));
+    const classes = useStyles();
     const history = useHistory();
+    const [title, setTitle] = React.useState('')
 
-    function handleClick(e) {
-        if (e.key === 'Enter') {
+    function handleClick(event) {
+        if (event.key === 'Enter' && title !== '') {
             history.push('/searchPage');
+            props.searchMovies(title)
+            setTitle('');
         }
     }
 
+    const handleChange = (event) => {
+        setTitle(event.target.value);
+    };
+
     return (
         <div className={'search'}>
-            <div className={'form'}>
-                <input type={'text'} placeholder={'Search..'} onKeyDown={handleClick}/>
-                <button type={'button'}>
-                    <NavLink to={'/searchPage'}>
-                        <FiSearch size={28}/>
-                    </NavLink>
-                </button>
-            </div>
+            <TextField className={classes.root}
+                       id="search-input"
+                       label="Search movies..."
+                       variant="outlined"
+                       style={{width: '700px'}}
+                       onKeyDown={handleClick}
+                       value={title}
+                       onChange={handleChange}
+            />
         </div>
     )
+}
+
+SearchInput.propTypes = {
+    searchMovies: PropTypes.func,
 }
 
 
