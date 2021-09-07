@@ -1,8 +1,11 @@
 import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import { changeListTC, getMoviesTC} from "../../redux/listsReducer";
+import {addFilmToList, changeListTC, getMoviesTC} from "../../redux/listsReducer";
 import MainPage from "./MainPage";
+import {AuthRedirect} from "../HOC/AuthRedirect";
+import {compose} from "redux";
+import {logoutTC} from "../../redux/profileReducer";
 
 class MainPageContainer extends React.Component {
 
@@ -14,7 +17,7 @@ class MainPageContainer extends React.Component {
         return (
             <MainPage profile={this.props.profile} movies={this.props.movies}
                       changeList={this.props.changeList}
-                      filters={this.props.filters}/>
+                      filters={this.props.filters} logout={this.props.logoutTC}/>
         )
     }
 }
@@ -33,6 +36,10 @@ let mapDispatchToProps = (dispatch) => {
         getMoviesTC: () => {
             dispatch(getMoviesTC());
         },
+        addFilmToList,
+        logoutTC: () => {
+            dispatch(logoutTC());
+        },
     }
 }
 
@@ -41,8 +48,11 @@ MainPageContainer.propTypes = {
     movies: PropTypes.array,
     changeList: PropTypes.func,
     filters: PropTypes.object,
-    getMoviesTC:PropTypes.func
+    getMoviesTC: PropTypes.func,
+    logoutTC: PropTypes.func,
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainPageContainer);
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    AuthRedirect)(MainPageContainer);

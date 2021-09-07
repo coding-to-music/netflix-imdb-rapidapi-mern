@@ -1,43 +1,60 @@
 .film {
-  border-bottom:  1px solid #727373;
+  border-bottom: 1px solid #727373;
   padding: 20px;
   display: flex;
-  .film-cover{
-    max-width: 25%;
+
+  .film-cover {
     padding-right: 30px;
-    .cover{
-      width:100%;
+    align-self: center;
+
+    .cover {
       object-fit: cover;
-      border-radius: 20px;
+      border-radius: 10px;
+      height: 225px;
+      width: 150px;
     }
   }
-  .film-information{
+
+  .film-information {
     padding: 20px;
-    .main{
+
+    .main {
       display: flex;
       padding-bottom: 15px;
       justify-content: space-between;
       font-size: 24px;
       font-weight: bolder;
-      .rating{
+
+      .rating {
         display: flex;
         align-items: center;
-        svg{
+
+        svg {
           padding-right: 5px;
         }
       }
     }
-    .release-date,.genre{
+
+    .release-date, .genre {
       font-size: 18px;
       padding-bottom: 10px;
     }
-    .genre{
+
+    .genre {
       display: flex;
       padding-bottom: 30px;
-      div{
+
+      div {
         margin-right: 10px;
         font-style: italic;
       }
+    }
+
+    .description {
+      max-height: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
     }
   }
 }

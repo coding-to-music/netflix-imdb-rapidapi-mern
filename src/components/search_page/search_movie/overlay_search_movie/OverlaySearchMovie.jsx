@@ -6,6 +6,14 @@ import OverlaySearchButton from "./overlay_search_button/OverlaySearchButton";
 
 
 const OverlayMovie = (props) => {
+
+    let list;
+    props.movies.find(movies => {
+        if (movies.imdbID === props.movie.imdbID) {
+            list = movies.list
+        }
+    })
+
     return (
         <div>
             <div className={'search-overlay-film'}>
@@ -20,22 +28,24 @@ const OverlayMovie = (props) => {
                             <FaRegStar/>{props.movie.imdbRating}
                         </div>
                     </div>
-                    <div className={'search-overlay-release-date'}>{props.movie.Released}</div>
+                    <div className={'search-overlay-release-date'}>Year: {props.movie.Year}</div>
                     <div className={'search-overlay-info'}>
                         <div>{props.movie.Genre}</div>
                         <div>Director: {props.movie.Director}</div>
                         <div>Actors: {props.movie.Actors}</div>
+                        {props.movie.Type === 'series'? <div>Seasons: {props.movie.totalSeasons}</div> : null}
                     </div>
                     <div className={'search-overlay-description'}>{props.movie.Plot}</div>
                 </div>
             </div>
-            <OverlaySearchButton/>
+            <OverlaySearchButton movie={props.movie} addFilmToList={props.addFilmToList} list={list}/>
         </div>
     )
 }
 
 OverlayMovie.propTypes = {
     movie: PropTypes.object,
+    movies: PropTypes.object,
     Poster: PropTypes.string,
     Title: PropTypes.string,
     imdbRating: PropTypes.string,
@@ -44,6 +54,8 @@ OverlayMovie.propTypes = {
     Plot: PropTypes.string,
     Director: PropTypes.string,
     Actors: PropTypes.string,
+    addFilmToList: PropTypes.func
+
 }
 
 

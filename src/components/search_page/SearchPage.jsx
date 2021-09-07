@@ -2,7 +2,6 @@ import React from "react";
 import './SearchPage.scss';
 import PropTypes from "prop-types";
 import SearchMovie from "./search_movie/SearchMovie";
-import SearchFilters from "./search_filter_line/SearchFilters";
 
 
 
@@ -13,7 +12,6 @@ const SearchPage = (props) => {
         return (
             <div className={'search-wrapper'}>
                 <div className={'search-page'}>
-                    <SearchFilters minWidth={200} filters={props.filters} />
                     <div className={'no-matches'}>No matches found</div>
                 </div>
             </div>
@@ -26,7 +24,6 @@ const SearchPage = (props) => {
     return(
         <div className={'search-wrapper'}>
             <div className={'search-page'}>
-                <SearchFilters minWidth={200} filters={props.filters} />
                 {movieElement}
             </div>
         </div>
@@ -35,9 +32,7 @@ const SearchPage = (props) => {
 
 
 SearchPage.propTypes ={
-    filters: PropTypes.object,
     movies:PropTypes.array,
-    searchByID: PropTypes.func,
 }
 
 

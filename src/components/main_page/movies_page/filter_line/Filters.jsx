@@ -90,4 +90,3 @@ Filters.propTypes = {
     filters: PropTypes.object
 }
 
-export default Filters;

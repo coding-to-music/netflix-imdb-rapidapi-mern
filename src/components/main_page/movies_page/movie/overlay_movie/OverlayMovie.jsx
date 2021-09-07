@@ -6,33 +6,32 @@ import OverlayButton from "./overlay_button/OverlayButton";
 
 
 const OverlayMovie = (props) => {
-    let genres = props.movie.genre.map(genre => (
-        <div key={genre}>{genre}</div>
-    ))
+
     return (
         <div>
             <div className={'overlay-film'}>
                 <div className={'overlay-film-cover'}>
                     <img className={'overlay-cover'} alt={'Film Cover'}
-                         src={props.movie.cover}/>
+                         src={props.movie.Poster}/>
                 </div>
                 <div className={'overlay-film-information'}>
                     <div className={'overlay-main'}>
-                        <div className={'overlay-title'}>{props.movie.title}</div>
+                        <div className={'overlay-title'}>{props.movie.Title}</div>
                         <div className={'overlay-rating'}>
-                            <FaRegStar/>{props.movie.rating}
+                            <FaRegStar/>{props.movie.imdbRating}
                         </div>
                     </div>
-                    <div className={'overlay-release-date'}>{props.movie.releaseDate}</div>
-                    <div className={'overlay-genre'}>
-                        {genres}
+                    <div className={'overlay-release-date'}>{props.movie.Released}</div>
+                    <div className={'overlay-info'}>
+                        <div>{props.movie.Genre}</div>
+                        <div>Director: {props.movie.Director}</div>
+                        <div>Actors: {props.movie.Actors}</div>
                     </div>
-                    <div className={'overlay-short-description'}>
-                        {props.movie.fullDescription}
+                    <div className={'overlay-description'}>{props.movie.Plot}
                     </div>
                 </div>
             </div>
-            <OverlayButton text={props.text} id={props.movie.id} changeList={props.changeList}/>
+            <OverlayButton text={props.text} id={props.movie.imdbID} changeList={props.changeList} />
         </div>
     )
 }
@@ -46,7 +45,7 @@ OverlayMovie.propTypes = {
     releaseDate: PropTypes.string,
     genre: PropTypes.array,
     fullDescription: PropTypes.string,
-    changeList: PropTypes.func
+    changeList: PropTypes.func,
 }
 
 

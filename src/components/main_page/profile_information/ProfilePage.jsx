@@ -5,19 +5,20 @@ import Lists from "./lists/Lists";
 import PropTypes from "prop-types";
 
 
-const ProfileInformation = (props) =>{
+const ProfilePage = (props) =>{
     return(
         <div className={'profile-information'}>
             <PersonalInformation profile={props.profile}/>
             <Lists/>
-            <div className={'log-out'}>Log out</div>
+            <div onClick={props.logout} className={'log-out'}>Log out</div>
         </div>
     )
 }
 
 
-ProfileInformation.propTypes = {
+ProfilePage.propTypes = {
     profile: PropTypes.object,
+    logout: PropTypes.func
 }
 
-export default ProfileInformation;
+export default ProfilePage;

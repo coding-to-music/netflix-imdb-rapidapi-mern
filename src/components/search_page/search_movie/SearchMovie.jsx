@@ -76,8 +76,6 @@ SearchMovie.propTypes = {
     Poster: PropTypes.string,
     Title: PropTypes.string,
     Year: PropTypes.string,
-    changeList: PropTypes.func,
-    searchByID: PropTypes.func
 }
 
 export default SearchMovie;

@@ -29,17 +29,15 @@
         }
       }
     }
-    .overlay-release-date,.genre{
-      font-size: 18px;
-      padding-bottom: 10px;
-    }
-    .overlay-genre{
-      display: flex;
-      padding-bottom: 30px;
+    .overlay-info{
+      padding: 10px 0 20px;
+      font-style: italic;
       div{
-        margin-right: 10px;
-        font-style: italic;
+        margin: 10px 0;
       }
+    }
+    .overlay-description{
+      font-size: 20px;
     }
   }
 }

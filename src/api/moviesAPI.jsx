@@ -14,22 +14,25 @@ export const moviesAPI = {
             .catch(error => console.error(error))
     },
     changeList(id, button) {
-        instance.patch('movies/',{id: id,button: button})
+        instance.patch('movies/', {id: id, button: button})
             .catch(error => console.error(error))
     },
-    searchMovies(title){
-         return instance.get(`search/?title=${title}`)
-             .then(response =>{
-                 return response.data.result.Search
-             })
+    searchMovies(title) {
+        return instance.get(`search/?title=${title}`)
+            .then(response => {
+                return response.data.result.Search
+            })
             .catch(error => console.log(error))
     },
-    searchMoviesByID(id){
+    searchMoviesByID(id) {
         return instance.get(`search/full?id=${id}`)
-            .then(response =>{
+            .then(response => {
                 return response.data.result
             })
             .catch(error => console.log(error))
+    },
+    addFilmToList(film) {
+        instance.post('addFilm/', {film})
+            .catch(error => console.log(error))
     }
 }
-

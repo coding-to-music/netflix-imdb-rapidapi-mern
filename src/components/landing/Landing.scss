@@ -1,0 +1,25 @@
+.main-landing {
+  background-image: url("../../pictures/2021-09-07-102341190.jpg");
+  background-size: cover;
+  height: 89vh;
+  display: flex;
+
+  .text-overlay {
+    background-color: rgba(89, 89, 89, 0.86);
+    width: 60%;
+    height: 50%;
+    border-radius: 5px;
+    margin: 120px auto;
+
+    .text-landing {
+      text-align: center;
+      width: 80%;
+      padding: 20px;
+      margin: 20px auto;
+      font-size: 35px;
+      color: #F2EAE4;
+    }
+  }
+}
+
+

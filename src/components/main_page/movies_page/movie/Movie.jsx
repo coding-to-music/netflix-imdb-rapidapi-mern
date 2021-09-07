@@ -46,9 +46,6 @@ const Movie = (props) => {
         </div>
     );
 
-    let genres = props.movie.genre.map(genre => (
-        <div key={genre}>{genre}</div>
-    ))
 
     if (props.text === props.movie.list) {
         return (
@@ -56,22 +53,18 @@ const Movie = (props) => {
                 <div className={'film'} onClick={handleOpen}>
                     <div className={'film-cover'}>
                         <img className={'cover'} alt={'Film Cover'}
-                             src={props.movie.cover}/>
+                             src={props.movie.Poster}/>
                     </div>
                     <div className={'film-information'}>
                         <div className={'main'}>
-                            <div className={'title'}>{props.movie.title}</div>
+                            <div className={'title'}>{props.movie.Title}</div>
                             <div className={'rating'}>
-                                <FaRegStar/>{props.movie.rating}
+                                <FaRegStar/>{props.movie.imdbRating}
                             </div>
                         </div>
-                        <div className={'release-date'}>{props.movie.releaseDate}</div>
-                        <div className={'genre'}>
-                            {genres}
-                        </div>
-                        <div className={'short-description'}>
-                            {props.movie.shortDescription}
-                        </div>
+                        <div className={'release-date'}>{props.movie.Released}</div>
+                        <div className={'genre'}>{props.movie.Genre}</div>
+                        <div className={'description'}>{props.movie.Plot}...</div>
                     </div>
                 </div>
                 <Modal

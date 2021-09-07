@@ -5,8 +5,9 @@ import {Button} from "@material-ui/core";
 
 
 const OverlayButton = (props) => {
+
     const buttonClick = (button) => {
-        props.changeList(props.id,button)
+        props.changeList(props.id, button)
     }
 
     return (
@@ -28,7 +29,7 @@ const OverlayButton = (props) => {
 OverlayButton.propTypes = {
     text: PropTypes.string,
     changeList: PropTypes.any,
-    id: PropTypes.number,
+    id: PropTypes.string,
 }
 
 

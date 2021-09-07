@@ -14,4 +14,8 @@
   text-align: center;
   font-size: 18px;
   padding-right: 20px;
+  cursor: pointer;
+  &:hover{
+    color: #F2786D;
+  }
 }
