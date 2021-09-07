@@ -1,6 +1,6 @@
 # WatchList
 
-![](gif/rkbqCHoObe.gif)
+![](gif/Animation.gif)
 
 ## About The Project
 
