@@ -16,28 +16,39 @@ server.use(express.json(),
 const port = 4000
 let axios = require("axios").default;
 
+const {MongoClient} = require("mongodb")
+const clientMongo = new MongoClient("mongodb://localhost:27017/")
 
-const Datastore = require('nedb')
-const data = new Datastore({filename: 'lists.jsonl', autoload: true});
-const users = new Datastore({filename: 'users.jsonl', autoload: true});
+clientMongo.connect()
 
-data.ensureIndex({fieldName: 'imdbID', unique: true}, function () {
+const database = clientMongo.db('WatchList')
+const movies = database.collection('movies')
+const users = database.collection('users')
+
+movies.createIndex({'imdbID': 1}, {unique: true}).then(r => {
+    console.log(r)
 })
 
 
-server.get('/movies', (req, res) => {
-    data.find({}, function (err, docs) {
-        res.send({
-            total: docs.size,
-            movies: docs
-        })
-    });
+server.get('/movies', async (req, res) => {
+    const movieDocs = await movies.find({}).toArray();
+    res.send({
+        total: movieDocs.size,
+        movies: movieDocs
+    })
 })
 
-server.patch('/movies', (req, res) => {
-    data.update({imdbID: req.body.id}, {"$set": {list: req.body.button}}, {}, function () {
+server.patch('/movies', async (req, res) => {
+
+    movies.updateOne({imdbID: req.body.id}, {"$set": {list: req.body.button}}, {}, function () {
         res.send({})
     });
+})
+
+server.post('/addFilm', (req, res) => {
+    movies.insertOne(req.body.film, function () {
+        res.send({})
+    })
 })
 
 server.get('/search', (req, res) => {
@@ -84,12 +95,6 @@ server.get('/search/full', (req, res) => {
         });
 })
 
-server.post('/addFilm', (req, res) => {
-    data.insert(req.body.film, function () {
-        res.send({})
-    })
-})
-
 
 const {OAuth2Client} = require('google-auth-library')
 const client = new OAuth2Client(process.env.CLIENT_ID)
@@ -103,13 +108,14 @@ server.post("/api/v1/auth/google", async (req, res) => {
     const {name, email, picture} = ticket.getPayload();
     let user = {name, picture, email}
     req.session.userEmail = user.email
-    users.update({email: email}, user, {upsert: true}, function () {
+    users.updateOne({email: email}, {$set: user}, {upsert: true}, function () {
             res.send(user)
         }
     )
 })
 
 server.get("/user", (req, res) => {
+
     users.findOne({email: req.session.userEmail}, function (err, docs) {
         if (!docs) {
             res.status(401).send({error: 'Something failed!', user: null})
@@ -119,6 +125,7 @@ server.get("/user", (req, res) => {
             user: docs
         })
     })
+
 })
 
 server.delete("/logout", (req, res) => {

@@ -13,9 +13,9 @@ Now you will not forget to watch the new episode of your favorite TV series
 * **react-redux : 7.2.4**
 * **axios : 0.21.1**
 * **node-sass: 6.0.1**
-* **express": 4.17.1**
-* **nedb": 1.8.0**
-* **google-auth-library": 7.6.2**
+* **express: 4.17.1**
+* **mongodb: 4.1.3,**
+* **google-auth-library: 7.6.2**
 * **Movie Database (IMDB Alternative) By RapidAPI**
 * **Material UI**
 
